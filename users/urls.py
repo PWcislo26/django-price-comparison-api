@@ -6,4 +6,5 @@ from users import views
 urlpatterns = [
     path('create/', views.CreateUserView.as_view()),
     path('token/', views.CreateTokeView.as_view()),
+    path('me/', views.ManageUserView.as_view()),
 ]
