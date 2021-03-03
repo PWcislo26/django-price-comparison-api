@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser, BaseUserManager, PermissionsMixin
+from simple_history.models import HistoricalRecords
 
 class UserMananger(BaseUserManager):
 
@@ -32,3 +33,26 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserMananger()
 
     USERNAME_FIELD = 'email'
+
+
+class Product(models.Model):
+    """Product object"""
+
+    CATEGORY_CHOICES = (
+        ('GPU', 'Graphics Card'),
+        ('CPU', 'Processor')
+    )
+    product_id = models.AutoField(primary_key=True)
+    product_name = models.CharField(max_length=255)
+    image = models.ImageField()
+    link = models.URLField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price_history = HistoricalRecords(excluded_fields=['image', 'link', 'created_at'])
+    category = models.CharField(choices=CATEGORY_CHOICES, max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.product_name
+
+
