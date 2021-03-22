@@ -17,8 +17,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         return self.serializer_class
 
 
-class WatchlistViewSet(mixins.ListModelMixin,
-                       mixins.RetrieveModelMixin,
+class WatchlistViewSet(mixins.RetrieveModelMixin,
                        mixins.UpdateModelMixin,
                        viewsets.GenericViewSet):
     """Manage watchlists in the database"""
@@ -27,8 +26,5 @@ class WatchlistViewSet(mixins.ListModelMixin,
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
-    def get_queryset(self):
-        """retrieve watchlist for the authenticated user"""
-        return self.queryset.filter(user=self.request.user)
 
 

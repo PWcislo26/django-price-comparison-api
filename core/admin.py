@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 from core import models
 
 class UserAdmin(BaseUserAdmin):
-    ordering = ['id']
+    ordering = ['user_id']
     list_display = ['email', 'name']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
