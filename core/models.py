@@ -1,6 +1,10 @@
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser, BaseUserManager, PermissionsMixin
 from simple_history.models import HistoricalRecords
+from django.conf import settings
+
 
 class UserMananger(BaseUserManager):
 
@@ -11,7 +15,6 @@ class UserMananger(BaseUserManager):
         user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self.db)
-
         return user
 
     def create_superuser(self, email, password):
@@ -23,7 +26,7 @@ class UserMananger(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """Custom user model that supports email"""
+    """User model"""
 
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -36,25 +39,42 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Product(models.Model):
-    """Product object"""
+    """Product model"""
 
     CATEGORY_CHOICES = (
         ('GPU', 'Graphics Card'),
         ('CPU', 'Processor')
     )
+
     product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=255)
     image = models.ImageField(blank=True, null=True)
     link_morele = models.URLField(max_length=255, blank=True)
+    slug = models.SlugField()
     price_morele = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
     link_xkom = models.URLField(max_length=255, blank=True)
     price_xkom = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
-    price_history = HistoricalRecords(excluded_fields=['product_name', 'image', 'link', 'category', 'created_at'], cascade_delete_history=True)
+    price_history = HistoricalRecords(
+        excluded_fields=['product_name', 'image', 'link', 'category', 'slug', 'link_morele', 'link_xkom'],
+        cascade_delete_history=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=20)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.product_name
 
 
+class Watchlist(models.Model):
+    """Watchlist model"""
+    watchlist_id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    products = models.ManyToManyField('Product', blank=True, )
+
+    def __str__(self):
+        return f'{self.watchlist_id} {self.user}'
+
+
+@receiver(post_save, sender=User)  # create a watchlist for created user
+def watchlist_create(sender, instance=None, created=False, **kwargs):
+    if created:
+        Watchlist.objects.create(user=instance, )
