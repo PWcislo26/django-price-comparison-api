@@ -50,12 +50,11 @@ class Product(models.Model):
     product_name = models.CharField(max_length=255)
     image = models.ImageField(blank=True, null=True)
     link_morele = models.URLField(max_length=255, blank=True)
-    slug = models.SlugField()
     price_morele = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
     link_xkom = models.URLField(max_length=255, blank=True)
     price_xkom = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
     price_history = HistoricalRecords(
-        excluded_fields=['product_name', 'image', 'link', 'category', 'slug', 'link_morele', 'link_xkom'],
+        excluded_fields=['product_name', 'image', 'link', 'category', 'link_morele', 'link_xkom'],
         cascade_delete_history=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=20)
 
@@ -66,7 +65,7 @@ class Product(models.Model):
 class Watchlist(models.Model):
     """Watchlist model"""
     watchlist_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    products = models.ManyToManyField('Product', blank=True, )
+    products = models.ManyToManyField('Product')
 
     def __str__(self):
         return f'{self.watchlist_id}'
