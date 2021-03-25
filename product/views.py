@@ -17,7 +17,8 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
         return self.serializer_class
 
 
-class WatchlistViewSet(mixins.RetrieveModelMixin,
+class WatchlistViewSet(mixins.ListModelMixin,
+                       mixins.RetrieveModelMixin,
                        mixins.UpdateModelMixin,
                        viewsets.GenericViewSet):
     """Manage watchlists in the database"""
