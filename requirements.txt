@@ -4,3 +4,5 @@
  beautifulsoup4
  celery
  Pillow
+ flower
+ celery-beat
