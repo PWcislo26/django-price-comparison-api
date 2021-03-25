@@ -12,7 +12,7 @@ from decimal import Decimal
 from product.serializers import ProductSerializer
 
 @shared_task
-def get_price_morele(products_list):
+def get_price_morele(products_list=Product.objects.all()):
     """Get product prices from morele via link and update prices"""
     for product in products_list:
         try:
@@ -31,7 +31,7 @@ def get_price_morele(products_list):
 
 
 @shared_task()
-def get_price_xkom(products_list):
+def get_price_xkom(products_list=Product.objects.all()):
     """Get product prices from xkom via link and update prices"""
     for product in products_list:
         try:
@@ -49,6 +49,4 @@ def get_price_xkom(products_list):
             print(get_price_xkom.__name__)
 
 
-get_price_morele(Product.objects.all())
-get_price_xkom(Product.objects.all())
 
