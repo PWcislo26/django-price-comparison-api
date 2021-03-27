@@ -8,17 +8,18 @@ class HistorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product.price_history.model
-        fields = ('price_morele', 'price_xkom', 'history_date')
+        fields = ('price_morele', 'price_xkom', 'price_proline', 'history_date')
 
 
 class ProductSerializer(serializers.ModelSerializer):
     """Serialize a product"""
 
+
     class Meta:
         model = Product
-        fields = (
-            'product_id', 'product_name', 'image', 'link_morele', 'price_morele',
-            'link_xkom', 'price_xkom', 'category'
+        fields = fields = (
+            'product_id', 'product_name', 'image', 'category',  'price_morele',
+             'price_xkom',  'price_proline',
         )
         read_only_fields = ('product_id',)
 
@@ -30,11 +31,9 @@ class ProductDetailSerializer(ProductSerializer):
     class Meta:
         model = Product
         fields = (
-            'product_id', 'product_name', 'image', 'link_morele', 'price_morele',
-            'link_xkom', 'price_xkom', 'category', 'price_history'
+            'product_id', 'product_name', 'image', 'category', 'link_morele', 'price_morele',
+            'link_xkom', 'price_xkom', 'link_proline', 'price_proline', 'price_history'
         )
-
-
 
 
 class WatchlistSerializer(serializers.ModelSerializer):
