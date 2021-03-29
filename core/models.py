@@ -51,11 +51,11 @@ class Product(models.Model):
     image = models.ImageField(blank=True, null=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=20)
     link_morele = models.URLField(blank=True)
-    price_morele = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
+    price_morele = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     link_xkom = models.URLField(blank=True)
-    price_xkom = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
+    price_xkom = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     link_proline = models.URLField(blank=True)
-    price_proline = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
+    price_proline = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     price_history = HistoricalRecords(
         excluded_fields=['product_name', 'image', 'link', 'category', 'link_morele', 'link_xkom', 'link_proline'],
         cascade_delete_history=True)
