@@ -5,6 +5,8 @@ from django.contrib.auth.models import AbstractBaseUser, AbstractUser, BaseUserM
 from simple_history.models import HistoricalRecords
 from django.conf import settings
 
+def upload_to(instance, filename):
+    return f'products/{filename}'
 
 class UserMananger(BaseUserManager):
 
@@ -48,7 +50,7 @@ class Product(models.Model):
 
     product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=255)
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField(blank=True, null=True, upload_to=upload_to)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=20)
     link_morele = models.URLField(blank=True)
     price_morele = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
