@@ -62,6 +62,9 @@ class Product(models.Model):
         excluded_fields=['product_name', 'image', 'link', 'category', 'link_morele', 'link_xkom', 'link_proline'],
         cascade_delete_history=True)
 
+    def min_price(self):
+        return min(self.price_morele, self.price_xkom, self.price_proline)
+
     def __str__(self):
         return self.product_name
 
