@@ -24,7 +24,6 @@ class WatchlistViewSet(mixins.ListModelMixin,
     """Manage watchlists in the database"""
     serializer_class = WatchlistSerializer
     queryset = Watchlist.objects.all()
-    authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
 
 

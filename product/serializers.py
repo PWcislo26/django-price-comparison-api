@@ -19,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = fields = (
             'product_id', 'product_name', 'image', 'category',  'price_morele',
-             'price_xkom',  'price_proline',
+             'price_xkom',  'price_proline', 'min_price',
         )
         read_only_fields = ('product_id',)
 
