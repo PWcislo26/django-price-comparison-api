@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Products from './components/products';
+import ProductLoadingComponent from './components/productLoading';
+import {API} from './apiService'
+
 
 function App() {
+
+  
+  const ProductLoading = ProductLoadingComponent(Products)
+  const [appState, setAppState] = useState({
+    loading: false,
+    products:null,
+  });
+  useEffect(() =>{
+    setAppState({loading : true});
+    API.products()
+      .then((products)=> {
+        setAppState({ loading : false, products : products});
+      });
+  }, [setAppState]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Products</h1>
+      <ProductLoading isLoading={appState.loading } products = {appState.products} />
     </div>
   );
 }
