@@ -32,7 +32,8 @@ class ProductDetailSerializer(ProductSerializer):
         model = Product
         fields = (
             'product_id', 'product_name', 'image', 'category', 'link_morele', 'price_morele',
-            'link_xkom', 'price_xkom', 'link_proline', 'price_proline', 'price_history'
+            'link_xkom', 'price_xkom', 'link_proline', 'price_proline', 'price_history',  'stats_morele', 'stats_xkom'
+            , 'stats_proline'
         )
 
 

@@ -1,9 +1,11 @@
 from django.db import models
+from django.db.models.functions import Round
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser, BaseUserManager, PermissionsMixin
 from simple_history.models import HistoricalRecords
 from django.conf import settings
+from django.db.models import Avg, Min, Max
 
 def upload_to(instance, filename):
     return f'products/{filename}'
@@ -64,6 +66,18 @@ class Product(models.Model):
 
     def min_price(self):
         return min(self.price_morele, self.price_xkom, self.price_proline)
+
+    def stats_morele(self):
+        return self.price_history.all().exclude(price_morele=0).aggregate(avg=Avg('price_morele'), max=Max('price_morele'),
+                                                  min=Min('price_morele'))
+
+    def stats_xkom(self):
+        return self.price_history.all().exclude(price_xkom=0).aggregate(avg=Avg('price_xkom'), max=Max('price_xkom'),
+                                                  min=Min('price_xkom'))
+
+    def stats_proline(self):
+        return self.price_history.all().exclude(price_proline=0).aggregate(avg=Avg('price_proline'), max=Max('price_proline'),
+                                                  min=Min('price_proline'))
 
     def __str__(self):
         return self.product_name
