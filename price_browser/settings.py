@@ -143,8 +143,7 @@ AUTH_USER_MODEL = 'core.User'
 
 # CELERY_BEAT_SCHEDULE ={
 #     "update_morele": {
-#         "task": "product.tasks.get_price_morele",
-#         "schedule": crontab(),
-#         "args": (),
+#         "task": "product.tasks.update_prices",
+#         "schedule": crontab(minute=53, hour=15),
 #     }
 # }

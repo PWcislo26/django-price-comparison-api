@@ -1,0 +1,5 @@
+celery -A price_browser worker -l info --pool=solo
+
+flower -A price_browser --port=5555
+
+celery -A price_browser beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
