@@ -44,7 +44,7 @@ function Header() {
               underline="none"
               color="textPrimary"
             >
-              Products
+              Produkty
             </Link>
           </Typography>
           <nav>
@@ -55,7 +55,7 @@ function Header() {
               component={NavLink}
               to="/register"
             >
-              Register
+              Rejestracja
             </Link>
           </nav>
           <Button
@@ -66,7 +66,7 @@ function Header() {
             component={NavLink}
             to="/login"
           >
-            Login
+            Logowanie
           </Button>
           <Button
             href="#"
@@ -76,7 +76,7 @@ function Header() {
             component={NavLink}
             to="/logout"
           >
-            Logout
+            Wyloguj
           </Button>
         </Toolbar>
       </AppBar>
