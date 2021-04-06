@@ -92,7 +92,6 @@ def update_prices():
             serializer.save()
 
 
-start = time.time()
+
 update_prices()
-end = time.time()
-print(end-start)
+
