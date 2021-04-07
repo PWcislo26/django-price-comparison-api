@@ -24,6 +24,7 @@ function Routing() {
 						<Route path="/login" component={Login} />
 						<Route path="/logout" component={Logout} />
 						<Route path="/product/:product_id" component={Product} />
+						
 					</Switch>
 					<Footer />
 				</BrowserRouter>

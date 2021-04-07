@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 
+
 const useStyles = makeStyles((theme) => ({
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
   const classes = useStyles();
+  
   return (
     <React.Fragment>
       <CssBaseline />
@@ -47,6 +49,7 @@ function Header() {
               Produkty
             </Link>
           </Typography>
+          
           <nav>
             <Link
               color="textPrimary"

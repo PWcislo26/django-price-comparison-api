@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API } from "../apiService";
 import { useParams } from "react-router-dom";
 import ProductPriceCollapsible from "./ProductPriceInfo";
+import Chart from "./PriceChart";
 
 //MaterialUI
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,8 +15,8 @@ import { Button } from "@material-ui/core";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import PriceChart from "./PriceChart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     margin: "auto",
-    maxWidth:"md"
+    maxWidth: "md",
   },
   img: {
     // margin: "auto",
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontWeight: theme.typography.fontWeightRegular,
-  }
+  },
 }));
 
 export default function Product() {
@@ -66,7 +67,6 @@ export default function Product() {
       setData({ product: resp });
     });
   }, [product_id]);
-
   return (
     <Container component="main" maxWidth="md">
       {data && (
@@ -75,14 +75,14 @@ export default function Product() {
           <div className={classes.heroContent}>
             <Container maxWidth="md">
               <div className={classes.productName}>
-              <Typography
-                component="h1"
-                variant="h4"
-                color="textPrimary"
-                gutterBottom
-              >
-                {data.product.product_name}
-              </Typography>
+                <Typography
+                  component="h1"
+                  variant="h4"
+                  color="textPrimary"
+                  gutterBottom
+                >
+                  {data.product.product_name}
+                </Typography>
               </div>
               <div className={classes.productImageDiv}>
                 <img
@@ -191,6 +191,22 @@ export default function Product() {
               </AccordionSummary>
               <AccordionDetails>
                 <ProductPriceCollapsible {...data} />
+              </AccordionDetails>
+            </Accordion>
+          </div>
+          <div className={classes.priceInfo}>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography className={classes.heading} color="textPrimary">
+                  Wykres cen:
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Chart price_history={data.product.price_history} />
               </AccordionDetails>
             </Accordion>
           </div>

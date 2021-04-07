@@ -24,7 +24,6 @@ function createData(shop, price, min, max, pricemin, pricemax) {
 }
 
 export default function ProductPriceTable({ product }) {
-  console.log(product);
   const rows = [
     createData(
       "Morele.net",
