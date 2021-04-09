@@ -1,39 +1,53 @@
 from rest_framework import serializers
 
-from core.models import Product, Watchlist
+from core.models import Product, Watchlist, RetailerProductPrice, Retailer
 
 
 class HistorySerializer(serializers.ModelSerializer):
     """serialize product history"""
 
     class Meta:
-        model = Product.price_history.model
-        fields = ('price_morele', 'price_xkom', 'price_proline', 'history_date')
+        model = RetailerProductPrice.price_history.model
+        fields = ('history_date', 'product_price')
+
+
+class RetailerSerializer(serializers.ModelSerializer):
+    "Serializer retailer"
+
+    class Meta:
+        model = Retailer
+        fields = ('retailer_name',)
+
 
 
 class ProductSerializer(serializers.ModelSerializer):
     """Serialize a product"""
 
-
     class Meta:
         model = Product
-        fields = fields = (
-            'product_id', 'product_name', 'image', 'category',  'price_morele',
-             'price_xkom',  'price_proline', 'min_price',
+        fields = (
+            'product_id', 'product_name', 'image', 'category',
         )
         read_only_fields = ('product_id',)
 
 
+class RetailerProductPriceSerializer(serializers.ModelSerializer):
+    retailer = RetailerSerializer(read_only=True)
+    price_history = HistorySerializer(many=True, read_only=True)
+
+    class Meta:
+        model = RetailerProductPrice
+        fields = ('retailer',  'product_link', 'product_price', 'price_history', 'price_stats')
+
+
 class ProductDetailSerializer(ProductSerializer):
     """serializer a product detail"""
-    price_history = HistorySerializer(many=True, read_only=True)
+    prices = RetailerProductPriceSerializer(read_only=True, many=True)
 
     class Meta:
         model = Product
         fields = (
-            'product_id', 'product_name', 'image', 'category', 'link_morele', 'price_morele',
-            'link_xkom', 'price_xkom', 'link_proline', 'price_proline', 'price_history',  'stats_morele', 'stats_xkom'
-            , 'stats_proline'
+            'product_id', 'product_name', 'image', 'category', 'prices'
         )
 
 
@@ -44,5 +58,5 @@ class WatchlistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Watchlist
-        fields = ('watchlist_id',  'products')
+        fields = ('watchlist_id', 'products')
         read_only_fields = ('watchlist_id',)

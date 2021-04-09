@@ -32,4 +32,7 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Product)
 admin.site.register(models.Watchlist)
+admin.site.register(models.Retailer)
+admin.site.register(models.RetailerProductPrice)
+
 
