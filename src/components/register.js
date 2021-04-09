@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function Register() {
   const history = useHistory();
   const initialFormData = Object.freeze({
     email: "",

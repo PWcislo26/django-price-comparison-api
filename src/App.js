@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Products from "./components/products";
-import ProductLoadingComponent from "./components/productLoading";
+import Products from "./components/Products";
+import ProductLoadingComponent from "./components/ProductLoading";
 import { API } from "./apiService";
 
 function App() {

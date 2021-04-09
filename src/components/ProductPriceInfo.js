@@ -23,35 +23,23 @@ function createData(shop, price, min, max, pricemin, pricemax) {
   return { shop, price, min, max, pricemin, pricemax };
 }
 
-export default function ProductPriceTable({ product }) {
-  const rows = [
-    createData(
-      "Morele.net",
-      product.price_morele,
-      product.stats_morele.min.toFixed(2),
-      product.stats_morele.max.toFixed(2),
-      ((product.price_morele / product.stats_morele.min) * 100).toFixed(2),
-      ((product.price_morele / product.stats_morele.max) * 100).toFixed(2)
-    ),
-    createData(
-      "Proline.pl",
-      product.price_proline,
-      product.stats_proline.min.toFixed(2),
-      product.stats_proline.max.toFixed(2),
-      ((product.price_proline / product.stats_proline.min) * 100).toFixed(2),
-      ((product.price_proline / product.stats_proline.max) * 100).toFixed(2)
-    ),
-    createData(
-      "Xkom.pl",
-      product.price_xkom,
-      product.stats_xkom.min.toFixed(2),
-      product.stats_xkom.max.toFixed(2),
-      ((product.price_xkom / product.stats_xkom.min) * 100).toFixed(2),
-      ((product.price_xkom / product.stats_xkom.max) * 100).toFixed(2)
-    ),
-  ];
+export default function ProductPriceInfo( props ) {
+  
+  const rows = [];
+  for(var i = 0; i<props.price_data.length; i++){
+    var retailer_instance = props.price_data[i]
+    rows.push(createData(
+      retailer_instance.retailer.retailer_name,
+      retailer_instance.product_price,
+      retailer_instance.price_stats.min.toFixed(2),
+      retailer_instance.price_stats.max.toFixed(2),
+      ((retailer_instance.product_price/ retailer_instance.price_stats.min) * 100).toFixed(2),
+      ((retailer_instance.product_price/ retailer_instance.price_stats.max) * 100).toFixed(2)
+    ))}
+
   const classes = useStyles();
   return (
+    
     <Container>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">

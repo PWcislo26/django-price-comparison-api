@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SignIn() {
+export default function Login() {
 	
 	const initialFormData = Object.freeze({
 		email: '',

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { API } from "../apiService";
 import { useParams } from "react-router-dom";
-import ProductPriceCollapsible from "./ProductPriceInfo";
-import Chart from "./PriceChart";
+import ProductPriceInfo from "./ProductPriceInfo";
+import PriceChart from "./PriceChart";
 
 //MaterialUI
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,7 +16,6 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import PriceChart from "./PriceChart";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,11 +66,13 @@ export default function Product() {
       setData({ product: resp });
     });
   }, [product_id]);
+  
   return (
     <Container component="main" maxWidth="md">
       {data && (
         <>
           <CssBaseline />
+          
           <div className={classes.heroContent}>
             <Container maxWidth="md">
               <div className={classes.productName}>
@@ -93,17 +94,18 @@ export default function Product() {
               </div>
             </Container>
           </div>
-          <div id="siteGrid" className={classes.siteGrid}>
+          {data.product.prices.map(({product_price, product_link, retailer }, index) => 
+          <div id="siteGrid" className={classes.siteGrid} key={index}>
             <Paper className={classes.paper}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm container>
                   <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
                       <Typography gutterBottom variant="subtitle1">
-                        Morele.net
+                        {retailer.retailer_name}
                       </Typography>
                       <Typography variant="body2" color="textPrimary">
-                        Cena: {data.product.price_morele} zł
+                        Cena: {product_price} zł
                       </Typography>
                     </Grid>
                   </Grid>
@@ -111,7 +113,7 @@ export default function Product() {
                     <Button
                       variant="contained"
                       color="secondary"
-                      href={data.product.link_morele}
+                      href={product_link}
                       target="_blank"
                     >
                       Odwiedź sklep
@@ -120,64 +122,7 @@ export default function Product() {
                 </Grid>
               </Grid>
             </Paper>
-          </div>
-          <div id="siteGrid" className={classes.siteGrid}>
-            <Paper className={classes.paper}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm container>
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="subtitle1">
-                        Proline.pl
-                      </Typography>
-                      <Typography variant="body2" color="textPrimary">
-                        Cena: {data.product.price_proline} zł
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      href={data.product.link_proline}
-                      target="_blank"
-                    >
-                      Odwiedź sklep
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Paper>
-          </div>
-          <div id="siteGrid" className={classes.siteGrid}>
-            <Paper className={classes.paper}>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm container>
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="subtitle1">
-                        Xkom.pl
-                      </Typography>
-                      <Typography variant="body2" color="textPrimary">
-                        Cena: {data.product.price_xkom} zł
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      href={data.product.link_xkom}
-                      target="_blank"
-                    >
-                      Odwiedź sklep
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Paper>
-          </div>
-          {/* {data.product.price_history.map(({price_xkom, price_morele}, index) => <p key={index}>{price_xkom}, {price_morele}</p>)} */}
+          </div>)}
           <div className={classes.priceInfo}>
             <Accordion>
               <AccordionSummary
@@ -190,23 +135,7 @@ export default function Product() {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <ProductPriceCollapsible {...data} />
-              </AccordionDetails>
-            </Accordion>
-          </div>
-          <div className={classes.priceInfo}>
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <Typography className={classes.heading} color="textPrimary">
-                  Wykres cen:
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Chart price_history={data.product.price_history} />
+                <ProductPriceInfo price_data ={data.product.prices} />
               </AccordionDetails>
             </Accordion>
           </div>

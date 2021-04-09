@@ -1,16 +1,16 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
-const Chart = (props) => {
+function PriceChart(props) {
   let dates = [];
   let price_morele = [];
   let price_proline = [];
   let price_xkom = [];
-  var pricedata = [];
+  
   for (const historyObj of props.price_history) {
-    
+
     dates.push(new Date(historyObj.history_date));
-      
+
 
     price_morele.push(historyObj.price_morele);
     price_proline.push(historyObj.price_proline);
@@ -20,10 +20,8 @@ const Chart = (props) => {
   price_morele.reverse();
   price_proline.reverse();
   price_xkom.reverse();
-  
- for(let i = 0; i < dates.length;++i){
-  pricedata.push({x: dates[i], y: price_morele[i]})
-}
+
+
 
 
 
@@ -38,24 +36,21 @@ const Chart = (props) => {
               data: price_morele,
               fill: false,
               borderColor: 'rgb(236, 90, 73)',
-            tension: 0.1
-
+              tension: 0.1
             },
             {
               label: "Proline",
               data: price_proline,
               fill: false,
               borderColor: 'rgb(45, 187, 247)',
-    tension: 0.1
-
+              tension: 0.1
             },
             {
-                label:"xkom",
-                data:price_xkom,
-                fill:false,
-                borderColor: 'rgb(0, 0, 0)',
-                tension: 0.1
-                
+              label: "xkom",
+              data: price_xkom,
+              fill: false,
+              borderColor: 'rgb(0, 0, 0)',
+              tension: 0.1
             }
           ],
         }}
@@ -66,18 +61,17 @@ const Chart = (props) => {
             xAxes: [{
               type: 'time',
               time: {
-                unit: 'day'        
-            },
-            ticks: {
-              autoSkip: true,
-              maxTicksLimit: 5
-          }
+                unit: 'day'
+              },
+              ticks: {
+                autoSkip: true,
+                maxTicksLimit: 5
+              }
             }],
           },
-        }}
-      />
+        }} />
     </div>
   );
-};
+}
 
-export default Chart;
+export default PriceChart;

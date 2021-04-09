@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {useCookies} from 'react-cookie';
 
-export default function SignUp() {
+export default function Logout() {
 	
 	const [token, setToken, removeToken] = useCookies(['token'])
 
