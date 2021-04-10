@@ -82,7 +82,7 @@ const Products = (props) => {
                       </Typography>  
                     </div>
                     <div className={classes.productText} >
-                    <Typography variant="p" color="textSecondary"> Cena od 'tu będzie min price' zł </Typography>
+                    <Typography variant="p" color="textSecondary"> Cena od: {product.min_price} zł </Typography>
                     </div>
                   </CardContent>
                 </Card>

@@ -13,42 +13,56 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-  tableHeaders:{
-
-
-  }
+  tableHeaders: {},
 });
 
 function createData(shop, price, min, max, pricemin, pricemax) {
   return { shop, price, min, max, pricemin, pricemax };
 }
 
-export default function ProductPriceInfo( props ) {
-  
+export default function ProductPriceInfo(props) {
   const rows = [];
-  for(var i = 0; i<props.price_data.length; i++){
-    var retailer_instance = props.price_data[i]
-    rows.push(createData(
-      retailer_instance.retailer.retailer_name,
-      retailer_instance.product_price,
-      retailer_instance.price_stats.min.toFixed(2),
-      retailer_instance.price_stats.max.toFixed(2),
-      ((retailer_instance.product_price/ retailer_instance.price_stats.min) * 100).toFixed(2),
-      ((retailer_instance.product_price/ retailer_instance.price_stats.max) * 100).toFixed(2)
-    ))}
+  for (var i = 0; i < props.price_data.length; i++) {
+    var retailer_instance = props.price_data[i];
+    rows.push(
+      createData(
+        retailer_instance.retailer.retailer_name,
+        retailer_instance.product_price,
+        retailer_instance.price_stats.min.toFixed(2),
+        retailer_instance.price_stats.max.toFixed(2),
+        (
+          (retailer_instance.product_price /
+            retailer_instance.price_stats.min) *
+          100
+        ).toFixed(2),
+        (
+          (retailer_instance.product_price /
+            retailer_instance.price_stats.max) *
+          100
+        ).toFixed(2)
+      )
+    );
+  }
 
   const classes = useStyles();
   return (
-    
     <Container>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow className={classes.tableHeaders}>
-              <TableCell><b>Sklep</b></TableCell>
-              <TableCell align="right"><b>Cena aktualna&nbsp;(zł)</b></TableCell>
-              <TableCell align="right"><b>Cena minimalna&nbsp;(zł)</b></TableCell>
-              <TableCell align="right"><b>Cena maksymalna&nbsp;(zł)</b></TableCell>
+              <TableCell>
+                <b>Sklep</b>
+              </TableCell>
+              <TableCell align="right">
+                <b>Cena aktualna&nbsp;(zł)</b>
+              </TableCell>
+              <TableCell align="right">
+                <b>Cena minimalna&nbsp;(zł)</b>
+              </TableCell>
+              <TableCell align="right">
+                <b>Cena maksymalna&nbsp;(zł)</b>
+              </TableCell>
               <TableCell align="right">
                 <b>Stosunek ceny aktualnej do ceny min.&nbsp;(%)</b>
               </TableCell>
