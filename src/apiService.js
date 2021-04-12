@@ -1,4 +1,5 @@
 export class API {
+    
     static login(body) {
         return fetch(`http://127.0.0.1:8000/api/user/token/`,{
             method : 'POST',
@@ -36,5 +37,26 @@ export class API {
         },
         
         }).then(resp => resp.json())
+    }
+
+    static addToWatchlist(pk, token){
+        return fetch(`http://127.0.0.1:8000/api/products/${pk}/add_to_watchlist/`,{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+                'Accept' : 'application/json',
+                'Authorization': `Token ${token['token']}`
+
+            }
+        })
+    }
+
+    static searchProducts(product){
+        return fetch(`http://127.0.0.1:8000/api/search/custom/?search=${product}`,{
+            method: 'GET',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
     }
 }

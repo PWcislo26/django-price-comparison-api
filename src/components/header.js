@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
-
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -23,7 +23,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
   const classes = useStyles();
-  
+  const [token] = useCookies(["token"]);
+  console.log(token["token"]);
+  let history = useHistory();
+  const [data, setData] = useState({ search: "" });
+
+  const goSearch = (e) => {
+    history.push({
+      pathname: "/search/",
+    });
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -49,38 +59,42 @@ function Header() {
               Produkty
             </Link>
           </Typography>
-          
-          <nav>
-            <Link
-              color="textPrimary"
+          {!token["token"] && (
+            <>
+              <Button
+                href="#"
+                color="primary"
+                variant="outlined"
+                className={classes.link}
+                component={NavLink}
+                to="/login"
+              >
+                Logowanie
+              </Button>
+              <Button
+                color="primary"
+                variant="outlined"
+                href="#"
+                className={classes.link}
+                component={NavLink}
+                to="/register"
+              >
+                Rejestracja
+              </Button>
+            </>
+          )}
+          {token["token"] && (
+            <Button
               href="#"
+              color="primary"
+              variant="outlined"
               className={classes.link}
               component={NavLink}
-              to="/register"
+              to="/logout"
             >
-              Rejestracja
-            </Link>
-          </nav>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/login"
-          >
-            Logowanie
-          </Button>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/logout"
-          >
-            Wyloguj
-          </Button>
+              Wyloguj
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </React.Fragment>

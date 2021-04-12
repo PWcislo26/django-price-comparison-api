@@ -3,6 +3,7 @@ import { API } from "../apiService";
 import { useParams } from "react-router-dom";
 import ProductPriceInfo from "./ProductPriceInfo";
 import PriceChart from "./PriceChart";
+import { useCookies } from "react-cookie";
 
 //MaterialUI
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -23,8 +24,11 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import StoreIcon from '@material-ui/icons/Store';
+import TrendingUpIcon from "@material-ui/icons/TrendingUp";
+import StoreIcon from "@material-ui/icons/Store";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,12 +39,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
     maxWidth: "sm",
   },
-  img: {
-    // margin: "auto",
-    // display: "block",
-    // maxWidth: "100%",
-    // maxHeight: "100%",
-  },
+
   siteGrid: {
     paddingTop: "5px",
     paddingBottom: "5px",
@@ -51,17 +50,28 @@ const useStyles = makeStyles((theme) => ({
   heroContent: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center"
+  },
+  img:{
+    maxWidth: "100%",
+    
   },
   productImage: {
-    maxWidth: "100%",
-    maxHeight: "100%",
-    height: "250px",
-    width: "350px",
-    display: "inline",
+   flexBasis: "40%",
+   height:"350px",
+   width:"450px"
   },
+  productName: {
+    paddingLeft:"20px",
+  },
+
   heading: {
     fontWeight: theme.typography.fontWeightRegular,
   },
+  shopButton:{
+    paddingLeft:"5px", 
+  }
+  
 }));
 
 const styles = (theme) => ({
@@ -129,14 +139,24 @@ export default function Product() {
     setOpen(false);
   };
 
+  const [token] = useCookies(['token']);
+  console.log(token['token']);
+
   return (
     <Container component="main" maxWidth="md">
       {data && (
         <>
           <CssBaseline />
-          
+          <Container maxWidth="md">
           <div className={classes.heroContent}>
-            <Container maxWidth="sm">
+           
+              <div className={classes.image}>
+              <img
+                  className={classes.productImage}
+                  src={data.product.image}
+                  alt="Brak zdjęcia"
+                ></img>
+              </div>
               <div className={classes.productName}>
                 <Typography
                   component="h1"
@@ -145,19 +165,17 @@ export default function Product() {
                   gutterBottom
                 >
                   {data.product.product_name}
+                  <br/>     
+                          
                 </Typography>
               </div>
-              <div className={classes.productImageDiv}>
-                <img
-                  className={classes.productImage}
-                  src={data.product.image}
-                  alt="Brak zdjęcia"
-                ></img>
-              </div>
-            </Container>
           </div>
+          </Container>
           {data.product.prices.map(
-            ({ product_price, product_link, retailer, price_history }, index) => (
+            (
+              { product_price, product_link, retailer, price_history },
+              index
+            ) => (
               <div id="siteGrid" className={classes.siteGrid} key={index}>
                 <Paper className={classes.paper}>
                   <Grid container spacing={2}>
@@ -171,14 +189,15 @@ export default function Product() {
                             Cena: {product_price} zł
                           </Typography>
                         </Grid>
+                        
                       </Grid>
-                      <Grid >
-                        <Button
+                      <Grid>
+                        <Button className={classes.historyButton}
                           variant="outlined"
                           color="primary"
                           onClick={handleClickOpen}
                         >
-                          Historia ceny  <TrendingUpIcon/>
+                          Historia ceny <TrendingUpIcon />
                         </Button>
                         <Dialog
                           onClose={handleClose}
@@ -192,11 +211,14 @@ export default function Product() {
                             Historia ceny
                           </DialogTitle>
                           <DialogContent dividers>
-                            <PriceChart chartData = {price_history} retailer = {retailer.retailer_name}/>
+                            <PriceChart
+                              chartData={price_history}
+                              retailer={retailer.retailer_name}
+                            />
                           </DialogContent>
                         </Dialog>
                       </Grid>
-                      <Grid>
+                      <Grid className={classes.shopButton}>
                         <Button
                           variant="contained"
                           color="secondary"
@@ -228,7 +250,6 @@ export default function Product() {
               </AccordionDetails>
             </Accordion>
           </div>
-          
         </>
       )}
     </Container>

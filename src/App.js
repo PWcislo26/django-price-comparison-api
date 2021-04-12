@@ -18,7 +18,7 @@ function App() {
   }, [setAppState]);
   return (
     <div className="App">
-      <h1>Products</h1>
+      
       <ProductLoading
         isLoading={appState.loading}
         products={appState.products}
