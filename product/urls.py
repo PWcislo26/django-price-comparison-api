@@ -16,5 +16,6 @@ app_name = 'product'
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('search/custom/', views.ProductListDetailFilter.as_view())
 
 ]

@@ -69,6 +69,16 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+    @property
+    def min_price(self):
+        prices = []
+        retailer_prices = RetailerProductPrice.objects.filter(product=self)
+        for price in retailer_prices:
+            prices.append(price.product_price)
+        return min(prices)
+
+
+
 
 class RetailerProductPrice(models.Model):
     """Product price model for a single retailer"""

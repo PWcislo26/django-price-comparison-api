@@ -6,7 +6,7 @@ from core.models import Product, Watchlist, Retailer,RetailerProductPrice
 from .serializers import ProductSerializer, WatchlistSerializer, ProductDetailSerializer, RetailerProductPriceSerializer, RetailerSerializer
 
 
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     """Manage products in the database"""
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
@@ -18,24 +18,23 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
 
         return self.serializer_class
 
-    @action(detail=True, methods=['GET'])
+    @action(detail=True, methods=['POST'])
     def add_to_watchlist(self, request, pk=None):
         """watchlist logic for adding and removing product"""
-        response = {'message': 'its working'}
         product = Product.objects.get(product_id=pk)
-        user = request.user
         watchlist = Watchlist.objects.get(user=request.user)
-        print(watchlist.user)
-        if Watchlist.objects.filter(user=request.user, products=product).exists():
-            watchlist.products.remove(product)
-        else:
-            watchlist.products.add(product)
+        try:
 
-        print(watchlist)
-        print(type(watchlist))
-        print(user)
-        print(product.product_name)
-        return Response(response, status=status.HTTP_200_OK)
+            if Watchlist.objects.filter(user=request.user, products=product).exists():
+                watchlist.products.remove(product)
+                response = {'message': 'product removed'}
+                return Response(response, status=status.HTTP_200_OK)
+            else:
+                watchlist.products.add(product)
+                response = {'message': 'product added'}
+                return Response(response, status=status.HTTP_200_OK)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProductListDetailFilter(generics.ListAPIView):
