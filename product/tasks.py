@@ -9,15 +9,14 @@ django.setup()
 import requests
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
-from core.models import  RetailerProductPrice
+from core.models import RetailerProductPrice
 from decimal import Decimal
 from product.serializers import RetailerProductPriceSerializer
-import time
 
 
 @shared_task()
 def update_price_morele(product, session):
-    """Update single morele.net product price"""
+    """Update a single morele.net product price"""
     request_session = session
     try:
         page = request_session.get(product.product_link, headers={'User-Agent': 'Mozilla/5.0'})
@@ -34,7 +33,7 @@ def update_price_morele(product, session):
 
 @shared_task()
 def update_price_xkom(product, session):
-    """Get product prices from xkom via link and return prices list"""
+    """Update a single xkom product price"""
     request_session = session
     try:
         page = request_session.get(product.product_link, headers={'User-Agent': 'Opera/9.60'})
@@ -51,7 +50,7 @@ def update_price_xkom(product, session):
 
 @shared_task()
 def update_price_proline(product, session):
-    """Get product prices from proline via link and return prices list"""
+    """Update a single proline product price"""
     request_session = session
 
     try:

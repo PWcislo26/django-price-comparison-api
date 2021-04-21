@@ -78,8 +78,6 @@ class Product(models.Model):
         return min(prices)
 
 
-
-
 class RetailerProductPrice(models.Model):
     """Product price model for a single retailer"""
     retailerproductprice_id = models.AutoField(primary_key=True)

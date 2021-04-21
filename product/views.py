@@ -6,7 +6,7 @@ from core.models import Product, Watchlist, Retailer,RetailerProductPrice
 from .serializers import ProductSerializer, WatchlistSerializer, ProductDetailSerializer, RetailerProductPriceSerializer, RetailerSerializer
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     """Manage products in the database"""
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
@@ -18,7 +18,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
         return self.serializer_class
 
-    @action(detail=True, methods=['POST'])
+    @action(detail=True, methods=['PATCH'])
     def add_to_watchlist(self, request, pk=None):
         """watchlist logic for adding and removing product"""
         product = Product.objects.get(product_id=pk)
