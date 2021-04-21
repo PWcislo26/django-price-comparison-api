@@ -19,14 +19,13 @@ class RetailerSerializer(serializers.ModelSerializer):
         fields = ('retailer_name',)
 
 
-
 class ProductSerializer(serializers.ModelSerializer):
     """Serialize a product"""
 
     class Meta:
         model = Product
         fields = (
-            'product_id', 'product_name', 'image', 'category',
+            'product_id', 'product_name', 'image', 'category', 'min_price'
         )
         read_only_fields = ('product_id',)
 
@@ -41,7 +40,7 @@ class RetailerProductPriceSerializer(serializers.ModelSerializer):
 
 
 class ProductDetailSerializer(ProductSerializer):
-    """serializer a product detail"""
+    """serialize product details"""
     prices = RetailerProductPriceSerializer(read_only=True, many=True)
 
     class Meta:
