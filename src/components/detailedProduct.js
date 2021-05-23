@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import ProductPriceInfo from "./ProductPriceInfo";
 import PriceChart from "./PriceChart";
 import { useCookies } from "react-cookie";
+import CustomDialog from './CustomDialog';
 
 //MaterialUI
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -17,18 +18,8 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { withStyles } from "@material-ui/core/styles";
-import Dialog from "@material-ui/core/Dialog";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import MuiDialogContent from "@material-ui/core/DialogContent";
-import MuiDialogActions from "@material-ui/core/DialogActions";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
-import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import StoreIcon from "@material-ui/icons/Store";
-import FavoriteIcon from '@material-ui/icons/Favorite';
-
-
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,42 +41,28 @@ const useStyles = makeStyles((theme) => ({
   heroContent: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
-  img:{
+  img: {
     maxWidth: "100%",
-    
   },
   productImage: {
-   flexBasis: "40%",
-   height:"350px",
-   width:"450px"
+    flexBasis: "40%",
+    height: "350px",
+    width: "450px",
   },
   productName: {
-    paddingLeft:"20px",
+    paddingLeft: "20px",
   },
 
   heading: {
     fontWeight: theme.typography.fontWeightRegular,
   },
-  shopButton:{
-    paddingLeft:"5px", 
-  }
-  
+  shopButton: {
+    paddingLeft: "5px",
+  },
 }));
 
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
-    position: "absolute",
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
-  },
-});
 
 export default function Product() {
   const { product_id } = useParams();
@@ -99,48 +76,7 @@ export default function Product() {
     });
   }, [product_id]);
 
-  const DialogTitle = withStyles(styles)((props) => {
-    const { children, classes, onClose, ...other } = props;
-    return (
-      <MuiDialogTitle disableTypography className={classes.root} {...other}>
-        <Typography variant="h6">{children}</Typography>
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            className={classes.closeButton}
-            onClick={onClose}
-          >
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </MuiDialogTitle>
-    );
-  });
-
-  const DialogContent = withStyles((theme) => ({
-    root: {
-      padding: theme.spacing(2),
-    },
-  }))(MuiDialogContent);
-
-  const DialogActions = withStyles((theme) => ({
-    root: {
-      margin: 0,
-      padding: theme.spacing(1),
-    },
-  }))(MuiDialogActions);
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [token] = useCookies(['token']);
-  console.log(token['token']);
+  const [token] = useCookies(["token"]);
 
   return (
     <Container component="main" maxWidth="md">
@@ -148,10 +84,9 @@ export default function Product() {
         <>
           <CssBaseline />
           <Container maxWidth="md">
-          <div className={classes.heroContent}>
-           
+            <div className={classes.heroContent}>
               <div className={classes.image}>
-              <img
+                <img
                   className={classes.productImage}
                   src={data.product.image}
                   alt="Brak zdjęcia"
@@ -165,11 +100,10 @@ export default function Product() {
                   gutterBottom
                 >
                   {data.product.product_name}
-                  <br/>     
-                          
                 </Typography>
+                <FavoriteIcon onClick={()=> {API.addToWatchlist(product_id, token['token']);}} />
               </div>
-          </div>
+            </div>
           </Container>
           {data.product.prices.map(
             (
@@ -189,35 +123,8 @@ export default function Product() {
                             Cena: {product_price} zł
                           </Typography>
                         </Grid>
-                        
                       </Grid>
-                      <Grid>
-                        <Button className={classes.historyButton}
-                          variant="outlined"
-                          color="primary"
-                          onClick={handleClickOpen}
-                        >
-                          Historia ceny <TrendingUpIcon />
-                        </Button>
-                        <Dialog
-                          onClose={handleClose}
-                          aria-labelledby="customized-dialog-title"
-                          open={open}
-                        >
-                          <DialogTitle
-                            id="customized-dialog-title"
-                            onClose={handleClose}
-                          >
-                            Historia ceny
-                          </DialogTitle>
-                          <DialogContent dividers>
-                            <PriceChart
-                              chartData={price_history}
-                              retailer={retailer.retailer_name}
-                            />
-                          </DialogContent>
-                        </Dialog>
-                      </Grid>
+                      <CustomDialog retailer ={ retailer.retailer_name} chartData = {price_history} />
                       <Grid className={classes.shopButton}>
                         <Button
                           variant="contained"

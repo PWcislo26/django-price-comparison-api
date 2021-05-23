@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import {API} from '../apiService';
+import { useCookies } from "react-cookie";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -35,17 +37,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Products = (props) => {
-  const { products } = props;
+const Watchlist = () => {
+  const [token] = useCookies(["token"]);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    API.getWatchlist(token['token']).then((resp) => {
+      setData({ resp });
+    });
+  }, [token]);
+
+      
+
   const classes = useStyles();
-  if (!products || products.length === 0)
+  if (!data|| data.resp[0].products.length === 0)
     return <p>Can not find any products, sorry</p>;
   return (
+    
     <React.Fragment>
+      <Typography
+      component="h1"
+      variant="h4"
+      color="textPrimary"
+      align="center"
+      gutterBottom
+      >
+        Lista obserwowanych produktów
+      </Typography>
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {products.map((product) => {
-            return (
+          {data.resp[0].products.map((product) => {
+            return (    
               // Enterprise card is full width at sm breakpoint
               <Grid item key={product.product_id} xs={12} md={4}>
                 <Card className={classes.card}>
@@ -57,7 +79,6 @@ const Products = (props) => {
                     <CardMedia
                       className={classes.cardMedia}
                       image={product.image}
-                      height='2000px'
                       title={product.product_name}
                     />
                   </Link>
@@ -96,4 +117,4 @@ const Products = (props) => {
     </React.Fragment>
   );
 };
-export default Products;
+export default Watchlist;

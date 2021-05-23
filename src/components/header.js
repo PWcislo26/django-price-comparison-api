@@ -84,6 +84,17 @@ function Header() {
             </>
           )}
           {token["token"] && (
+            <>            
+            <Button
+              href="#"
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+              component={NavLink}
+              to="/watchlist"
+            >
+              Obserwowane produkty 
+            </Button>
             <Button
               href="#"
               color="primary"
@@ -94,6 +105,7 @@ function Header() {
             >
               Wyloguj
             </Button>
+            </>
           )}
         </Toolbar>
       </AppBar>

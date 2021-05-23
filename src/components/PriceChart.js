@@ -2,13 +2,13 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 
 function PriceChart(props) {
-  console.log(props)
+
   let dates = [];
   let prices = [];
 
   for (const historyObj of props.chartData) {
 
-    dates.push(new Date(historyObj.history_date));
+    dates.push(new Date(historyObj.history_date).toDateString());
 
 
     prices.push(historyObj.product_price);
@@ -16,7 +16,7 @@ function PriceChart(props) {
   }
   dates.reverse();
   prices.reverse();
- 
+  
   return (
     
     <div>
@@ -29,7 +29,7 @@ function PriceChart(props) {
               data: prices,
               fill: false,
               borderColor: 'rgb(236, 90, 73)',
-              tension: 0.1
+              tension: 0.0
             },
           ],
         }}
@@ -44,7 +44,7 @@ function PriceChart(props) {
               },
               ticks: {
                 autoSkip: true,
-                maxTicksLimit: 14
+                maxTicksLimit: 7
               }
             }],
           },
