@@ -11,6 +11,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Product from './components/DetailedProduct';
 import Watchlist from './components/Watchlist';
+import Guide from './components/Guide';
 import {CookiesProvider} from 'react-cookie';
 import theme from './components/theme';
 
@@ -22,13 +23,14 @@ function Routing() {
 				<ThemeProvider theme={theme}>
 				<BrowserRouter>
 					<Header />
-					<Switch>
+					<Switch>						
 						<Route exact path="/" component={App} />
 						<Route path="/register" component={Register} />
 						<Route path="/login" component={Login} />
 						<Route path="/logout" component={Logout} />
 						<Route path="/product/:product_id" component={Product} />
 						<Route path="/watchlist" component={Watchlist}/>
+						<Route path="/guide" component={Guide}/>
 					</Switch>
 					<Footer />
 				</BrowserRouter>

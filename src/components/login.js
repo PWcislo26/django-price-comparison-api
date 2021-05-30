@@ -45,7 +45,7 @@ export default function Login() {
 
 	useEffect(()=>{
 		console.log(token);
-		if(token.token) window.location.href ='/';
+		if(token.token && token.token !== "undefined") window.location.href ='/';
 	}, [token])
 
 	const handleChange = (e) => {

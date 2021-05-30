@@ -101,7 +101,7 @@ export default function Product() {
                 >
                   {data.product.product_name}
                 </Typography>
-                <FavoriteIcon onClick={()=> {API.addToWatchlist(product_id, token['token']);}} />
+                <FavoriteIcon onClick={()=> {API.addToWatchlist(product_id, token['token']);}}/>
               </div>
             </div>
           </Container>

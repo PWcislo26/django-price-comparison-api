@@ -59,7 +59,7 @@ function Header() {
               Produkty
             </Link>
           </Typography>
-          {!token["token"] && (
+          {(!token.token || token.token === "undefined" ) && (
             <>
               <Button
                 href="#"
@@ -83,7 +83,7 @@ function Header() {
               </Button>
             </>
           )}
-          {token["token"] && (
+          {(token.token && token.token !== "undefined") && (
             <>            
             <Button
               href="#"
