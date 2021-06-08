@@ -59,11 +59,11 @@ const Guide = () => {
             za lepszą markę. Przez ostatnie kilka lat AMD znacznie odrobiło
             zaległości, co więcej niedawno nawet wyprzedziło technologicznie
             Intel i posiada bardziej interesującą ofertę. Oprócz znakomitej
-            wydajnośći procesory AMD posiadają znacząco mniejsze zużycie prądu
-            co przekłada się na niższe koszty eksploatacji oraz niższe
-            temparatury pracy procesora. Dlatego aby pozostać konkurencyjnym
-            Intel w ostatnim czasie znacząco obniżył ceny swoich produktów,
-            które już od dłuższego czasu skierowane są głównie dla graczy.
+            wydajnośći procesory AMD posiadają mniejsze zużycie prądu co
+            przekłada się na niższe koszty eksploatacji oraz niższe temparatury
+            pracy samego urządznia. Dlatego aby pozostać konkurencyjnym Intel w
+            ostatnim czasie znacząco obniżył ceny swoich produktów, które już od
+            dłuższego czasu pozostawały wysoko ponad ofertą AMD.
           </Typography>
           <div className={classes.accordion}>
             <Accordion>
@@ -79,35 +79,35 @@ const Guide = () => {
               <AccordionDetails>
                 <Typography component="p" variant="h6" color="textPrimary">
                   Przed zakupem procesora należy zadać sobie pytanie do czego
-                  głównie będziemy wykorzystywać nasz komputer. Za najprostszy
-                  wskaźnik wyznaczający klasę procesora można uznać liczbę
-                  rdzeni, która determinuje jego moc oraz cenę. Z uwagi na
-                  zastosowanie można wyodrębnić 3 podstawowe grupy podziału
+                  głównie będziemy wykorzystywać nasz komputer. Od tego zależeć
+                  będzie moc urządzenia, które umieścimy w naszym komputerze. Za
+                  najprostszy wskaźnik wyznaczający klasę procesora można uznać
+                  liczbę rdzeni, która determinuje jego moc oraz cenę. Z uwagi
+                  na zastosowanie można wyodrębnić 3 podstawowe grupy podziału
                   procesorów:
                   <ol>
                     <li>
-                      4 rdzenie - Jest to obecnie najniższa liczba rdzeni
+                      2-4 rdzenie - Jest to obecnie najniższa liczba rdzeni
                       oferowana przez producentów we współczesnych modelach
                       procesorów. Tego typu urządzenia kosztują maksymalnie
                       ok.700 zł i najlepiej sprawdzają się tam gdzie silny
-                      procesor nie jest wymagany. Procesor 4 rdzeniowy świetnie
-                      sprawdzi się w biurze czy w domowym komputerze
-                      wykorzystywanym do podstawowych czynności. Będzie on
+                      procesor nie jest wymagany.Taki procesor świetnie sprawdzi
+                      się w biurze czy w domowym komputerze wykorzystywanym do
+                      podstawowych czynności. 4 rdzeniowa jednostka będzie
                       również w stanie obsłużyć większość współczesnych gier
                       komputerowych. Reprezentanci tej serii to AMD Ryzen serii
                       3 oraz Intel Core-I3.
                     </li>
                     <li>
-                      6-8 rdzeni - Procesory z tak zwanej średniej półki,
-                      chociaż ich cena może czasem osiągać nawet 2000zł. Jednak
-                      za typowy przedział w zależności od wydajności można uznać
-                      od 800 zł do 1600 zł. Zdecydowanie najczęstszy wybór wśród
-                      graczy, zapewniający świetną wydajność w grach
-                      komputerowych. Warto zaznaczyć, że budowa systemu opartego
-                      na procesorze Intela jest przeważnie bardziej kosztowna z
-                      uwagi na droższe płyty główne. Reprezentanci tej kategorii
-                      to AMD Ryzen serii 5 i 7, Intel Core I5 oraz Intel Core
-                      I7.
+                      6-8 rdzeni - Jest to zdecydowana większość kupowanych
+                      obecnie procesorów. Za typowy przedział cenowy w
+                      zależności od wydajności można uznać od 800 zł do 1600 zł.
+                      Bez wątpienia najczęstszy wybór wśród graczy, zapewniający
+                      świetną wydajność w grach komputerowych. Warto zaznaczyć,
+                      że budowa systemu opartego na procesorze Intela jest
+                      przeważnie bardziej kosztowna z uwagi na droższe płyty
+                      główne. Reprezentanci tej kategorii to AMD Ryzen serii 5 i
+                      7, Intel Core I5 oraz Intel Core I7.
                     </li>
                     <li>
                       10+ rdzeni - Zastosowań dla takiego procesora jest wiele,
@@ -164,15 +164,22 @@ const Guide = () => {
           </Typography>
           <Typography component="p" variant="h6" color="textPrimary">
             Karta graficzna w odróżnieniu od procesora jest opcjonalnym
-            komponentem a bez niego możliwa jest praca komputera a jak sama
-            nazwa wskazuje jej podstawym zadaniem jest generowanie obrazu. Karty
-            graficzne dzielą się na dwa typy :
+            komponentem i teoretycznie bez niego możliwa jest praca komputera a
+            jak sama nazwa wskazuje jej podstawowym zadaniem jest generowanie
+            obrazu. Zatem do szeroko pojętego standardowego użytku kartę
+            graficzną można uznać za obowiązkową. Karty graficzne dzielą się na
+            dwa typy :
             <ul>
               <li>
                 Zintegrowane, czyli takie, które nierozłącznie połączone są z
                 procesorem. Oferują minimalną wydajność a korzystanie z nich
                 pozwala jedynie na podstawowe czynności wykonywane na
-                komputerze.
+                komputerze. W domyśle wszystkie modele procesorów Intela
+                posiadają zintegrowaną kartę graficzną a specjalne warianty bez
+                niej oznaczone są końcówką 'f' np. Intel Core i7-10700f.
+                Sytuacja z procesorami AMD jest odwrotna, większość jednostek
+                nie posiada karty graficznej, a te które ją mają będą kończyć
+                się literą "G" np. AMD Ryzen 5 3400G.
               </li>
               <li>
                 Dedykowane, czyli takie, które są osobnym komponentem komputera.
@@ -183,8 +190,8 @@ const Guide = () => {
             Rynek dedykowanych kart graficznych jest niestety o wiele bardziej
             skomplikowany od rynku procesorów. Za produkcję chipów do kart
             odpowiadają dwie firmy - AMD oraz Nvidia, jednak rzadko kiedy
-            odpowiadają one za produkcję całych kart a produkowane przez nie
-            jednostki nazywane są referencyjnymi i mają bardzo ograniczony
+            odpowiadają one za pełną produkcję całych kart a produkowane przez
+            nie jednostki nazywane są referencyjnymi i mają bardzo ograniczony
             nakład. Przestrzegając specyfikacji wymaganej przez tych dwóch
             producentów do produkcji pozostałej ilości włączone są firmy trzecie
             takie jak MSI, Asus czy Gigabyte, które oferują swoje rozwiązania w
@@ -208,10 +215,10 @@ const Guide = () => {
             <AccordionDetails>
               <Typography component="p" variant="h6" color="textPrimary">
                 W przypadku kart graficznych niemożliwe jest wskazanie jednej
-                konkretnej cechy sprzętowej, która pozwoliłaby na klasyfikację
-                sprzętu a jedynym możliwym wyznacznikiem jest po prostu cena.
-                Niestety na niekorzyść klienta, w ostatnich latach niezależnie
-                od sytuacji na rynku ceny kart idą w górę a z generacji na
+                konkretnej cechy sprzętowej, która pozwoliłaby na prostą
+                klasyfikację sprzętu a jedynym możliwym wyznacznikiem jest cena.
+                Niestety na niekorzyść klienta w ostatnich latach niezależnie od
+                sytuacji na rynku ceny kart idą w górę a z generacji na
                 generację przychodzi nam płacić coraz więcej za sprzęt w tej
                 samej klasie. Sugerowany podział jest subiektywny i
                 odzwierciedla opinię autora:
@@ -227,8 +234,8 @@ const Guide = () => {
                     Od 1000 do 3000 zł - W tym przedziale cenowym znajdziemy
                     zdecydowaną większość wszystkich dostępnych modeli.
                     Przezaczenie odpowiednio wysokiej kwoty w tych widełkach
-                    pozwoli na rozgrywkę w rozdzielczościach do WQHD (1440p) przy
-                    zachowaniu wysokiej wydajności. Karty z tego przedziału
+                    pozwoli na rozgrywkę w rozdzielczościach do WQHD (1440p)
+                    przy zachowaniu wysokiej wydajności. Karty z tego przedziału
                     pozwolą również na średnio obciążające czynności jak różnego
                     rodzaju obliczenia naukowe, symulacje matematyczne czy
                     przetwarzanie obrazu.
@@ -253,7 +260,7 @@ const Guide = () => {
               id="panel1a-header"
             >
               <Typography component="p" variant="h5" color="textPrimary">
-                Sytuacja na rynku kart graficznych
+                Obecna sytuacja na rynku kart graficznych
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -269,6 +276,14 @@ const Guide = () => {
             </AccordionDetails>
           </Accordion>
         </div>
+        <br/>
+        <Typography
+        component="p"
+        type="caption"
+        color="textSecondary"
+        align="right">
+          Ostania aktualizacja 31.05.2021
+        </Typography>
       </Container>
     </React.Fragment>
   );

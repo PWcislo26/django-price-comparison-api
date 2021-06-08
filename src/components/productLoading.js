@@ -5,7 +5,7 @@ function ProductLoading(Component) {
 		if (!isLoading) return <Component {...props} />;
 		return (
 			<p style={{ fontSize: '25px' }}>
-				We are waiting for the data to load!...
+				Oczekiwanie na załadowanie danych...
 			</p>
 		);
 	};

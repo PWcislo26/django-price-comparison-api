@@ -9,10 +9,18 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  card:{
+    maxWidth: 400
+  }
+  ,
   cardMedia: {
     paddingTop: "56.25%", // 16:9
+    height: 100,
+    width: '50%',
+    marginLeft:'33%'
   },
   link: {
     margin: theme.spacing(1, 1.5),
@@ -35,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
     
   },
+  mediaImage:{
+    height:"32px"
+  },
+  button:{
+    paddingTop:"10px",
+    textAlign: "center"
+  }
 }));
 
 const Watchlist = () => {
@@ -70,46 +85,45 @@ const Watchlist = () => {
             return (    
               // Enterprise card is full width at sm breakpoint
               <Grid item key={product.product_id} xs={12} md={4}>
-                <Card className={classes.card}>
-                  <Link
-                    color="textPrimary"
-                    href={"product/" + product.product_id}
-                    className={classes.Link}
-                  >
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={product.image}
-                      title={product.product_name}
-                    />
-                  </Link>
+              <Card className={classes.card}>
+                <Link
+                  color="textPrimary"
+                  href={"product/" + product.product_id}
+                  className={classes.Link}
+                >
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={product.image}
+                    title={product.product_name}
+                  />
+                </Link>
 
-                  <CardContent className={classes.cardContent}>
-                    <Typography
-                      gutterBottom
-                      variant="h6"
-                      component="h2"
-                      className={classes.productName}
-                    >
-                      {product.product_name}
-                    </Typography>
-                    <div className={classes.productText}>
-                      <Typography
-                        component="p"
-                        color="textPrimary"
-                      ></Typography>
-                        <Typography variant="p" color="textSecondary">
-                        Kategoria: {product.category}
-                      </Typography>  
-                    </div>
-                    <div className={classes.productText} >
-                    <Typography variant="p" color="textSecondary"> Cena od: {product.min_price[0]} zł </Typography>
-                    </div>
-                    <div className={classes.productText}>
-                    <Typography variant="p" color="textSecondary"> Dostępny w: {product.min_price[1]} sklepach</Typography>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Grid>
+                <CardContent className={classes.cardContent}>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                    className={classes.productName}
+                  >
+                    {product.product_name}
+                  </Typography>
+                  <div className={classes.productText}>
+                      <Typography variant="body2" color="textPrimary">
+                      Kategoria: {product.category}
+                    </Typography>  
+                  </div>
+                  <div className={classes.productText} >
+                  <Typography variant="body2"color="textPrimary"> Cena od: {product.min_price[0]} zł </Typography>
+                  </div>
+                  <div className={classes.productText}>
+                  <Typography variant="body2" color="textPrimary"> Dostępny w: {product.min_price[1]} sklepach</Typography>
+                  </div>
+                  <div className={classes.button}>
+                    <Button  variant="contained" color="primary" href={"product/" + product.product_id}>Sprawdź ceny</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </Grid>
             );
           })}
         </Grid>

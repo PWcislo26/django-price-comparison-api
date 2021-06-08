@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { API } from "../apiService";
 import { useParams } from "react-router-dom";
 import ProductPriceInfo from "./ProductPriceInfo";
-import PriceChart from "./PriceChart";
 import { useCookies } from "react-cookie";
 import CustomDialog from './CustomDialog';
 
@@ -47,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100%",
   },
   productImage: {
-    flexBasis: "40%",
-    height: "350px",
-    width: "450px",
+    flexBasis:40,
+    height: "320px",
+    width: "393px",
   },
   productName: {
     paddingLeft: "20px",
@@ -128,7 +127,7 @@ export default function Product() {
                       <Grid className={classes.shopButton}>
                         <Button
                           variant="contained"
-                          color="secondary"
+                          color="primary"
                           href={product_link}
                           target="_blank"
                         >

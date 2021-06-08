@@ -7,10 +7,18 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
+  card:{
+    maxWidth: 400
+  }
+  ,
   cardMedia: {
     paddingTop: "56.25%", // 16:9
+    height: 100,
+    width: '50%',
+    marginLeft:'33%'
   },
   link: {
     margin: theme.spacing(1, 1.5),
@@ -33,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
     
   },
+  mediaImage:{
+    height:"32px"
+  },
+  button:{
+    paddingTop:"10px",
+    textAlign: "center"
+  }
 }));
 
 const Products = (props) => {
@@ -57,7 +72,6 @@ const Products = (props) => {
                     <CardMedia
                       className={classes.cardMedia}
                       image={product.image}
-                      height='2000px'
                       title={product.product_name}
                     />
                   </Link>
@@ -72,19 +86,18 @@ const Products = (props) => {
                       {product.product_name}
                     </Typography>
                     <div className={classes.productText}>
-                      <Typography
-                        component="p"
-                        color="textPrimary"
-                      ></Typography>
-                        <Typography variant="p" color="textSecondary">
+                        <Typography variant="body2" color="textPrimary">
                         Kategoria: {product.category}
                       </Typography>  
                     </div>
                     <div className={classes.productText} >
-                    <Typography variant="p" color="textSecondary"> Cena od: {product.min_price[0]} zł </Typography>
+                    <Typography variant="body2"color="textPrimary"> Cena od: {product.min_price[0]} zł </Typography>
                     </div>
                     <div className={classes.productText}>
-                    <Typography variant="p" color="textSecondary"> Dostępny w: {product.min_price[1]} sklepach</Typography>
+                    <Typography variant="body2" color="textPrimary"> Dostępny w: {product.min_price[1]} sklepach</Typography>
+                    </div>
+                    <div className={classes.button}>
+                      <Button  variant="contained" color="primary" href={"product/" + product.product_id}>Sprawdź ceny</Button>
                     </div>
                   </CardContent>
                 </Card>

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useCookies } from "react-cookie";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 
@@ -25,14 +25,6 @@ function Header() {
   const classes = useStyles();
   const [token] = useCookies(["token"]);
   console.log(token["token"]);
-  let history = useHistory();
-  const [data, setData] = useState({ search: "" });
-
-  const goSearch = (e) => {
-    history.push({
-      pathname: "/search/",
-    });
-  };
 
   return (
     <React.Fragment>
@@ -59,6 +51,16 @@ function Header() {
               Produkty
             </Link>
           </Typography>
+          <Button
+              href="#"
+              color="primary"
+              variant="outlined"
+              className={classes.link}
+              component={NavLink}
+              to="/guide"
+            >
+              Poradnik
+            </Button>
           {(!token.token || token.token === "undefined" ) && (
             <>
               <Button
