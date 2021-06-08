@@ -8,6 +8,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { NavLink} from "react-router-dom";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import LockIcon from '@material-ui/icons/Lock';
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -57,6 +62,7 @@ function Header() {
               variant="outlined"
               className={classes.link}
               component={NavLink}
+              endIcon = {<LocalLibraryIcon/>}
               to="/guide"
             >
               Poradnik
@@ -69,9 +75,10 @@ function Header() {
                 variant="outlined"
                 className={classes.link}
                 component={NavLink}
+                endIcon= {<LockOpenIcon/>}
                 to="/login"
               >
-                Logowanie
+                Zaloguj się 
               </Button>
               <Button
                 color="primary"
@@ -79,6 +86,7 @@ function Header() {
                 href="#"
                 className={classes.link}
                 component={NavLink}
+               endIcon = {<VpnKeyIcon/>}
                 to="/register"
               >
                 Rejestracja
@@ -93,6 +101,7 @@ function Header() {
               variant="outlined"
               className={classes.link}
               component={NavLink}
+              endIcon = {<VisibilityIcon/>}
               to="/watchlist"
             >
               Obserwowane produkty 
@@ -103,9 +112,10 @@ function Header() {
               variant="outlined"
               className={classes.link}
               component={NavLink}
+              endIcon = {<LockIcon/>}
               to="/logout"
             >
-              Wyloguj
+              Wyloguj się 
             </Button>
             </>
           )}
