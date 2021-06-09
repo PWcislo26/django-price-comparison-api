@@ -125,7 +125,7 @@ MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -135,9 +135,9 @@ REST_FRAMEWORK = {
 
 AUTH_USER_MODEL = 'core.User'
 
-# CELERY_BEAT_SCHEDULE ={
-#     "update_morele": {
-#         "task": "product.tasks.update_prices",
-#         "schedule": crontab(minute=53, hour=15),
-#     }
-# }
+CELERY_BEAT_SCHEDULE ={
+    "update_price": {
+        "task": "product.tasks.update_prices",
+        "schedule": crontab(minute=0, hour=15),
+    }
+}

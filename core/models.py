@@ -69,13 +69,19 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+    class Meta:
+        ordering = ['category', 'product_name']
+
     @property
     def min_price(self):
+        """Returns min price among retailers and number of retailers"""
         prices = []
+        retailers = 0
         retailer_prices = RetailerProductPrice.objects.filter(product=self)
         for price in retailer_prices:
             prices.append(price.product_price)
-        return min(prices)
+            retailers += 1
+        return min(prices), retailers
 
 
 class RetailerProductPrice(models.Model):
