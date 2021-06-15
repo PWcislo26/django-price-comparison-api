@@ -19,8 +19,14 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import StoreIcon from "@material-ui/icons/Store";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import IconButton from '@material-ui/core/IconButton';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+
 
 const useStyles = makeStyles((theme) => ({
+  main:{
+    paddingTop: "20px"
+  },
   root: {
     flexGrow: 1,
   },
@@ -78,7 +84,7 @@ export default function Product() {
   const [token] = useCookies(["token"]);
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="md" className={classes.main}>
       {data && (
         <>
           <CssBaseline />
@@ -100,7 +106,11 @@ export default function Product() {
                 >
                   {data.product.product_name}
                 </Typography>
-                <FavoriteIcon onClick={()=> {API.addToWatchlist(product_id, token['token']);}}/>
+                <IconButton>
+                  < VisibilityIcon fontSize="large"
+                  onClick={()=> {API.addToWatchlist(product_id, token['token']);}}
+                  />
+                </IconButton>
               </div>
             </div>
           </Container>

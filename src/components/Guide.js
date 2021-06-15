@@ -38,9 +38,10 @@ const Guide = () => {
         </Typography>
         <div>
           <Typography component="p" variant="h6" color="textPrimary">
-            W tym poradniku znajdziesz wszystkie najważniejsze informacje, które
-            pomogą ci dokonać wyboru przy zakupie nowego procesora oraz karty
-            graficznej.
+            Ten poradnik został stworzony z myślą o konsmencie nowym na rynku
+            sprzętu komputerowego. Znajdziesz tutaj wszystkie najistotniejsze
+            informacje, które pozwolą Ci na dokonanie jak najlepszego wyboru
+            odnośnie przyszłego zakupu procesora oraz karty graficznej.
           </Typography>
         </div>
         <div>
@@ -53,17 +54,17 @@ const Guide = () => {
             Procesory
           </Typography>
           <Typography component="p" variant="h6" color="textPrimary">
-            Od dłuższego czasu rynek procesorów zdominowany jest przez dwie
-            marki - Intel oraz AMD. Przez większość tego okresu Intel jakością
+            Mówiąc o procesorach do komputerów osobistych mamy tak na prawdę na
+            myśli dwie marki - Intel oraz AMD. Przez długi czas Intel jakością
             swoich produktów był daleko przed swoim konkurentem i uznawany był
             za lepszą markę. Przez ostatnie kilka lat AMD znacznie odrobiło
             zaległości, co więcej niedawno nawet wyprzedziło technologicznie
-            Intel i posiada bardziej interesującą ofertę. Oprócz znakomitej
-            wydajnośći procesory AMD posiadają mniejsze zużycie prądu co
-            przekłada się na niższe koszty eksploatacji oraz niższe temparatury
-            pracy samego urządznia. Dlatego aby pozostać konkurencyjnym Intel w
-            ostatnim czasie znacząco obniżył ceny swoich produktów, które już od
-            dłuższego czasu pozostawały wysoko ponad ofertą AMD.
+            Intel i na ten moment posiada bardziej interesującą ofertę. Oprócz
+            znakomitej wydajnośći w grach i aplikacjach użytkowych procesory AMD
+            oferują mniejsze zużycie prądu co przekłada się na niższe koszty
+            eksploatacji oraz lepszą kulturę pracy samego urządznia. Intel, aby
+            pozostać konkurencyjnym, w ostatnim czasie znacząco obniżył ceny
+            swoich produktów, co zwiększyło opłacalność zakupu ich procesorów.
           </Typography>
           <div className={classes.accordion}>
             <Accordion>
@@ -91,23 +92,23 @@ const Guide = () => {
                       oferowana przez producentów we współczesnych modelach
                       procesorów. Tego typu urządzenia kosztują maksymalnie
                       ok.700 zł i najlepiej sprawdzają się tam gdzie silny
-                      procesor nie jest wymagany.Taki procesor świetnie sprawdzi
-                      się w biurze czy w domowym komputerze wykorzystywanym do
-                      podstawowych czynności. 4 rdzeniowa jednostka będzie
-                      również w stanie obsłużyć większość współczesnych gier
-                      komputerowych. Reprezentanci tej serii to AMD Ryzen serii
-                      3 oraz Intel Core-I3.
+                      procesor nie jest wymagany.Takie urządzenie świetnie
+                      sprawdzi się w biurze czy w domowym komputerze
+                      wykorzystywanym do podstawowych czynności. 4 rdzeniowa
+                      jednostka będzie również w stanie obsłużyć większość
+                      współczesnych gier komputerowych. Główni reprezentanci tej
+                      klasy to AMD Ryzen serii 3 oraz Intel Core I3.
                     </li>
                     <li>
-                      6-8 rdzeni - Jest to zdecydowana większość kupowanych
-                      obecnie procesorów. Za typowy przedział cenowy w
-                      zależności od wydajności można uznać od 800 zł do 1600 zł.
-                      Bez wątpienia najczęstszy wybór wśród graczy, zapewniający
-                      świetną wydajność w grach komputerowych. Warto zaznaczyć,
-                      że budowa systemu opartego na procesorze Intela jest
-                      przeważnie bardziej kosztowna z uwagi na droższe płyty
-                      główne. Reprezentanci tej kategorii to AMD Ryzen serii 5 i
-                      7, Intel Core I5 oraz Intel Core I7.
+                      6-8 rdzeni - Jest to zdecydowanie najszybciej zyskująca na
+                      popularności grupa procesorów. Za typowy przedział cenowy
+                      w zależności od wydajności można uznać od 800 zł do 1600
+                      zł. Bez wątpienia obecnie najczęstszy wybór wśród graczy,
+                      zapewniający świetną wydajność w grach komputerowych.
+                      Warto zaznaczyć, że budowa systemu opartego na procesorze
+                      Intela jest przeważnie bardziej kosztowna z uwagi na
+                      droższe płyty główne. Reprezentanci tej kategorii to AMD
+                      Ryzen serii 5 i 7, Intel Core I5 oraz Intel Core I7.
                     </li>
                     <li>
                       10+ rdzeni - Zastosowań dla takiego procesora jest wiele,
@@ -276,12 +277,13 @@ const Guide = () => {
             </AccordionDetails>
           </Accordion>
         </div>
-        <br/>
+        <br />
         <Typography
-        component="p"
-        type="caption"
-        color="textSecondary"
-        align="right">
+          component="p"
+          type="caption"
+          color="textSecondary"
+          align="right"
+        >
           Ostania aktualizacja 31.05.2021
         </Typography>
       </Container>
