@@ -1,6 +1,7 @@
 from celery import shared_task
 import os
 from datetime import datetime
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "price_browser.settings")
 import django
 
@@ -12,6 +13,14 @@ from bs4 import SoupStrainer
 from core.models import RetailerProductPrice
 from decimal import Decimal
 from product.serializers import RetailerProductPriceSerializer
+
+
+def exception_handler(product, e):
+    """handle errors for product while updating price"""
+    with open('log.txt', 'a') as log:
+        log.write("scraping failed for product {} from shop {}, exception is: {}.\n Date of error {}\n".format(
+            product.product, product.retailer, e, datetime.now()))
+    print("error report added to log.txt file")
 
 
 @shared_task()
@@ -26,10 +35,7 @@ def update_price_morele(product, session):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
     except Exception as e:
-        with open('log.txt', 'a') as log:
-            log.write("scraping failed for product {} from shop {}, exception is: {}.\n Date of error {}\n".format(
-                product.product_name, product.retailer, e, datetime.now()))
-        print("error report added to log.txt file")
+        exception_handler(product, e)
 
 
 @shared_task()
@@ -44,10 +50,7 @@ def update_price_xkom(product, session):
         if serializer.is_valid(raise_exception=True):
             serializer.save()
     except Exception as e:
-        with open('log.txt', 'a') as log:
-            log.write("scraping failed for product {} from shop {}, exception is: {}.\n Date of error {}\n".format(
-                product.product_name, product.retailer, e, datetime.now()))
-        print("error report added to log.txt file")
+        exception_handler(product, e)
 
 
 @shared_task()
@@ -64,9 +67,7 @@ def update_price_proline(product, session):
             serializer.save()
 
     except Exception as e:
-        with open('log.txt', 'a') as log:
-            log.write("scraping failed for product {} from shop {}, exception is: {}.\n Date of error {}\n".format(product.product_name, product.retailer, e, datetime.now()))
-        print("error report added to log.txt file")
+        exception_handler(product, e)
 
 
 
@@ -82,10 +83,5 @@ def update_prices():
         else:
             update_price_proline(product, request_session)
 
-
-def test():
-    products = RetailerProductPrice.objects.all()
-    for i in products:
-        print(i.retailer)
 
 update_prices()
